@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'View/onboarding/onboarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint('Firebase init notice: $e');
+  }
   runApp(const MyApp());
 }
 
@@ -15,12 +20,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Firebase Assignment',
+      title: 'Home Rental App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF163A35),
+          primary: const Color(0xFF163A35),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFF9F9F7),
         useMaterial3: true,
       ),
-      home: const StudentPage(),
+      home: const OnboardingScreen(),
     );
   }
 }
